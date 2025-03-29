@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Speed Test</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Title -->
+        <h1>TypeRush</h1>
+
+        <!-- Retake Button -->
+        <button id="retakeTest">Retake Test</button>
+
+        <!-- Dropdown to select test duration -->
+        <div id="dropdown">
+            <label for="timeSelector">Select Test Duration:</label>
+            <select id="timeSelector">
+                <option value="30">30 Seconds</option>
+                <option value="60">60 Seconds</option>
+                <option value="120">120 Seconds</option>
+            </select>
+        </div>
+
+        <!-- Dropdown to select sample text -->
+        <div id="dropdown">
+            <label for="sampleTextSelector">Select Sample Text:</label>
+            <select id="sampleTextSelector">
+                <option value="0">Select</option>
+                <option value="1">TEXT 1</option>
+                <option value="2">TEXT 2</option>
+                <option value="3">TEXT 3</option>
+                <option value="4">TEXT 4</option>
+                <option value="5">TEXT 5</option>
+                <option value="6">TEXT 6</option>
+                <option value="7">TEXT 7</option>
+                <option value="8">TEXT 8</option>
+                <option value="9">TEXT 9</option>
+                <option value="10">TEXT 10</option>
+            </select>
+        </div>
+        <div id="timer">Time Remaining: 30</div>
+        <!-- Typing Area Container -->
+        <div id="typingAreaContainer">
+            <!-- Vertical Progress Bar -->
+            <div id="progressContainer">
+                <div id="progressBar"></div>
+            </div>
+
+            <!-- Timer and Typing Area -->
+            <div id="typingAreaContent">
+                
+                <div id="sampleTextDisplay">
+                    <p>Please choose a sample text to begin.</p>
+                </div>
+                <textarea id="typingArea" placeholder="Start typing here..." disabled></textarea>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="result">
+            <p>WPM: <span id="wpm">0</span></p>
+            <p>Accuracy: <span id="accuracy">0</span>%</p>
+            <p>Wrong Words: <span id="wrongWordsCount">0</span></p>
+            <p id="letterCounter">Typed Letters: 0</p>
+            <button onclick="saveTypingResult()">Save Result</button>
+        </div>
+
+        <!-- Modal for Test Completion -->
+        <div id="resultModal" class="modal">
+            <div class="modal-content">
+                <h2>Test Completed</h2>
+                <p><strong>WPM:</strong> <span id="modalWpm">0</span></p>
+                <p><strong>Accuracy:</strong> <span id="modalAccuracy">0</span>%</p>
+                <p><strong>Wrong Words:</strong> <span id="modalWrongWords">0</span></p>
+                <ul></ul>
+                <button id="closeModalBtn">Close</button>
+            </div>
+        </div>
+
+        <!-- Leaderboard Section -->
+        <h2>Your Typing History</h2>
+        <table id="leaderboardTable">
+            <tr>
+                <th>Date</th>
+                <th>WPM</th>
+                <th>Accuracy</th>
+            </tr>
+        </table>
+
+        <!-- Audio Files for Feedback -->
+        <audio id="rightLetterSound" src="keystroke.mp3" preload="auto"></audio>
+        <audio id="wrongLetterSound" src="wrong.mp3" preload="auto"></audio>
+        <audio id="spacebarSound" src="word_done.mp3" preload="auto"></audio>
+    </div>
+
+    <!-- JavaScript File -->
+    <script src="script.js"></script>
+</body>
+</html>

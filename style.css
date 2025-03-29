@@ -1,0 +1,530 @@
+/* Importing Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* Font Face Definitions */
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins-Regular.woff2') format('woff2'),
+         url('fonts/Poppins-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins-Light.woff2') format('woff2'),
+         url('fonts/Poppins-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins-Bold.woff2') format('woff2'),
+         url('fonts/Poppins-Bold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
+
+/* General Body Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #2b3e50, #6e8efb);
+    color: white;
+    text-align: center;
+    padding: 30px 15px; /* Reduced padding */
+    font-size: 1rem; /* Smaller font */
+}
+
+/* Heading with Typing Animation */
+h1 {
+    font-size: 2rem; /* Reduced size */
+    margin-bottom: 20px;
+    color: white;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: bold;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid white;
+    width: 0;
+    animation: typing 3s steps(20, end) forwards, blink 0.7s infinite;
+}
+
+/* Section Spacing */
+section {
+    margin-bottom: 25px; /* Reduced margin */
+}
+
+/* Dropdown Styling */
+select, #durationSelect {
+    border: 2px solid #3498db;
+    background-color: #e0f7fa;
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+    color: #2c3e50;
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    margin: 0 10px; /* Removed margin-right due to overriding */
+    font-weight: 600;
+    text-align: center;
+    min-width: 120px; /* Removed flex-basis as it requires a flex container */
+}
+
+
+select:hover, select:focus,
+#durationSelect:hover, #durationSelect:focus {
+    border-color: #ff4757;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #ffffff;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Sample Text Display */
+#sampleTextDisplay {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 15px;
+    margin: 15px auto;
+    font-size: 1rem; /* Smaller text */
+    min-height: 80px; /* Reduced height */
+    max-width: 90%;
+    text-align: justify;
+    animation: textFadeIn 2s ease-in-out;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Typing Area */
+textarea {
+    width: 90%;
+    height: 100px; /* Reduced height */
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid #6e8efb;
+    border-radius: 15px;
+    outline: none;
+    resize: none;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+}
+
+/* Progress Bar Container */
+#progressContainer {
+    width: 15px;
+    height: 90%;
+    background: rgba(34, 34, 34, 0.6); /* Slight transparency */
+    border-radius: 10px;
+    backdrop-filter: blur(5px); /* Light glass effect */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 5%;
+    right: 10px;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+/* Progress Bar with Lighting Effect */
+#progressBar {
+    width: 100%;
+    height: 0;
+    background: linear-gradient(180deg, #28A745, #FFC107, #FF5733);
+    border-radius: 10px;
+    transition: height 0.6s ease-in-out, background 0.3s ease-in-out;
+    position: relative;
+}
+
+#progressBar::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 10%, transparent 70%);
+    transform: translateX(-50%);
+    opacity: 0.5;
+    transition: opacity 0.3s ease-in-out;
+}
+
+#progressBar:hover::after {
+    opacity: 0.8;
+}
+
+/* Correct & Wrong Word Highlight */
+.correct {
+    color: #FFA500;
+    font-weight: 600;
+    animation: fadeInUp 0.5s ease-in-out;
+}
+
+.wrong {
+    color: #000000;
+    font-weight: 600;
+    animation: shake 0.5s ease-in-out;
+}
+
+/* Result Display */
+#resultDisplay {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 15px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+#resultDisplay p {
+    font-size: 1rem; /* Smaller text */
+    color: white;
+    margin: 0 10px;
+    font-weight: 600;
+    text-align: center;
+    flex-basis: 20%;
+    min-width: 120px;
+}
+
+/* Button Styling */
+button {
+    padding: 10px 18px; /* Reduced padding */
+    font-size: 1rem;
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background 0.4s ease, transform 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    background: #ff4757;
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Additional Button Styling */
+#retakeTest {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    margin-top: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+    background: rgba(52, 152, 219, 0.3); /* Glass effect */
+    border: 2px solid rgba(52, 152, 219, 0.8);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(52, 152, 219, 0.3);
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+#retakeTest:hover {
+    animation: float 1s infinite ease-in-out;
+    background: rgba(52, 152, 219, 0.5);
+    box-shadow: 0 12px 40px rgba(52, 152, 219, 0.5);
+}
+
+#retakeTest::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 100%;
+    height: 100%;
+    background: rgba(52, 152, 219, 0.5);
+    filter: blur(15px);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+/* Glow Effect on Hover */
+#retakeTest:hover::before {
+    opacity: 1;
+}
+
+/* Click Effect */
+#retakeTest:active {
+    transform: scale(0.95);
+    background: rgba(52, 152, 219, 0.8);
+    box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+}
+
+/* Table Styling */
+table {
+    width: 90%;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+th, td {
+    padding: 10px 15px; /* Reduced padding */
+    font-size: 1rem;
+    text-align: center;
+    color: white;
+}
+
+th {
+    background: rgba(255, 255, 255, 0.2);
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Modal Styling */
+.modal {
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Slightly darker overlay for emphasis */
+    z-index: 1000;
+    animation: fadeIn 0.4s ease-in-out; /* Smooth fade-in */
+}
+
+/* Modal Content */
+.modal-content {
+    background: linear-gradient(135deg, #f9f9f9, #e3e3e3); /* Subtle gradient */
+    color: #333;
+    padding: 25px 35px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    max-width: 500px; /* Enhanced size */
+    width: 90%; /* Responsive for smaller screens */
+    animation: slideIn 0.4s ease-out; /* Smooth slide-in animation */
+}
+
+/* Modal Heading Styles */
+.modal-content h2,
+.modal-content h3 {
+    margin-bottom: 20px;
+    color: #222; /* Slightly darker for better contrast */
+    font-family: 'Arial', sans-serif;
+    font-weight: 700; /* Bold for emphasis */
+    font-size: 1.5rem; /* Larger headings */
+}
+
+/* Modal List */
+.modal-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.modal-content ul li {
+    margin-bottom: 10px;
+    color: #555;
+    font-family: 'Arial', sans-serif;
+    padding-left: 20px;
+    position: relative;
+}
+
+.modal-content ul li::before {
+    content: '✔'; /* Custom bullet points */
+    position: absolute;
+    left: 0;
+    color: #3498db;
+    font-weight: bold;
+}
+
+/* Close Button */
+#closeResultModal {
+    padding: 12px 25px;
+    background: #3498db; /* Main brand color */
+    color: #ffffff; /* White text */
+    border: none;
+    border-radius: 25px; /* Fully rounded button */
+    cursor: pointer;
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+#closeResultModal:hover {
+    background: #2980b9; /* Darker hover effect */
+    transform: scale(1.05); /* Slight zoom for better interactivity */
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Fade-out Animation for Modal */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+}
+/* Additional Animations */
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25%, 75% {
+        transform: translateX(-5px);
+    }
+    50% {
+        transform: translateX(5px);
+    }
+}
+
+@keyframes textFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Leaderboard Title */
+h2 {
+    font-size: 1.5rem;
+    margin-top: 30px;
+    color: white;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Result Display with Hover Effect */
+#result p {
+    border: 2px solid #3498db; /* Standard blue color */
+    background-color: #e0f7fa; /* Light cyan for a modern look */
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-right: 10px;
+    color: #2c3e50; /* Dark text for contrast */
+    font-family: Arial, sans-serif; /* Clean typography */
+    transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth hover effects */
+}
+
+#result p:hover {
+    transform: scale(1.1); /* Slight zoom on hover */
+    background-color: #3498db; /* Change to blue on hover */
+    color: white; /* White text for better readability */
+}
+/* Styling for Dropdown */
+#dropdown {
+    display: inline-block; /* Keeps it inline with other elements */
+    font-size: 14px; /* Readable text size */
+    color: #ffffff; /* Neutral text color */
+    border-radius: 5px; /* Slightly rounded corners */
+    cursor: pointer; /* Adds pointer effect */
+}
+
+/* Styling for Timer */
+#timer {
+    display: inline;
+    padding:  10px;
+    font-size: 1rem; /* Combined font-size declarations */
+    background-color: #3498db;
+    border-radius: 5px;
+    color: white;
+    margin: 0 10px;
+    font-weight: 600;
+    text-align: center;
+    min-width: 120px; /* Removed flex-basis as it requires a flex container */
+}
+
