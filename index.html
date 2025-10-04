@@ -3,99 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Typing Speed Test</title>
+    <title>TypeRush | Advanced Typing Test</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/png" sizes="192x192px" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto+Mono:wght@400;700&family=Noto+Sans+Arabic:wght@400;600&family=Noto+Sans+Devanagari:wght@400;600&family=SolaimanLipi:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Title -->
-        <h1>TypeRush</h1>
 
-        <!-- Retake Button -->
-        <button id="retakeTest">Retake Test</button>
+    <div class="app-container">
+        <!-- Animated Background -->
+        <div class="bg-animation"></div>
 
-        <!-- Dropdown to select test duration -->
-        <div id="dropdown">
-            <label for="timeSelector">Select Test Duration:</label>
-            <select id="timeSelector">
-                <option value="30">30 Seconds</option>
-                <option value="60">60 Seconds</option>
-                <option value="120">120 Seconds</option>
-            </select>
-        </div>
-
-        <!-- Dropdown to select sample text -->
-        <div id="dropdown">
-            <label for="sampleTextSelector">Select Sample Text:</label>
-            <select id="sampleTextSelector">
-                <option value="0">Select</option>
-                <option value="1">TEXT 1</option>
-                <option value="2">TEXT 2</option>
-                <option value="3">TEXT 3</option>
-                <option value="4">TEXT 4</option>
-                <option value="5">TEXT 5</option>
-                <option value="6">TEXT 6</option>
-                <option value="7">TEXT 7</option>
-                <option value="8">TEXT 8</option>
-                <option value="9">TEXT 9</option>
-                <option value="10">TEXT 10</option>
-            </select>
-        </div>
-        <div id="timer">Time Remaining: 30</div>
-        <!-- Typing Area Container -->
-        <div id="typingAreaContainer">
-            <!-- Vertical Progress Bar -->
-            <div id="progressContainer">
-                <div id="progressBar"></div>
+        <!-- Header with Theme & Profile -->
+        <header>
+            <div class="header-left">
+                <h1><i class="fas fa-terminal"></i> TypeRush</h1>
             </div>
-
-            <!-- Timer and Typing Area -->
-            <div id="typingAreaContent">
-                
-                <div id="sampleTextDisplay">
-                    <p>Please choose a sample text to begin.</p>
+            <div class="header-right">
+                <div class="theme-switcher">
+                    <button id="themeToggle" class="neon-button small"><i class="fas fa-palette"></i> Theme</button>
                 </div>
-                <textarea id="typingArea" placeholder="Start typing here..." disabled></textarea>
+                <button id="profileButton" class="neon-button small"><i class="fas fa-user"></i> Profile</button>
+            </div>
+        </header>
+
+        <!-- Main Content Container -->
+        <div class="content-wrapper">
+            <!-- Main Content -->
+            <main class="main-card">
+                <!-- Start Screen -->
+                <section id="startScreen" class="screen active">
+                    <h2>Configure Your Test</h2>
+                    <div class="config-grid">
+                        <div class="config-item">
+                            <label for="languageSelector"><i class="fas fa-globe"></i> Language</label>
+                            <select id="languageSelector">
+                                <option value="english">English</option>
+                                <option value="bangla">বাংলা (Bangla)</option>
+                                <option value="arabic">العربية (Arabic)</option>
+                                <option value="hindi">हिन्दी (Hindi)</option>
+                            </select>
+                        </div>
+                        <div class="config-item">
+                            <label for="timeSelector"><i class="fas fa-clock"></i> Duration</label>
+                            <select id="timeSelector">
+                                <option value="30">30 Seconds</option>
+                                <option value="60">60 Seconds</option>
+                                <option value="120">120 Seconds</option>
+                            </select>
+                        </div>
+                        <div class="config-item">
+                            <label for="fontSelector"><i class="fas fa-font"></i> Font</label>
+                            <select id="fontSelector">
+                                <option value="default">Default</option>
+                                <option value="monospace">Monospace</option>
+                                <option value="bangla">Bangla Unicode</option>
+                                <option value="arabic">Arabic Unicode</option>
+                                <option value="hindi">Hindi Unicode</option>
+                                <option value="bijoy">Bijoy (if installed)</option>
+                            </select>
+                        </div>
+                        <div class="config-item">
+                            <label for="soundToggle"><i class="fas fa-volume-up"></i> Sound Effects</label>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="soundToggle" checked>
+                                <label for="soundToggle" class="slider"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="startButton" class="neon-button">
+                        <i class="fas fa-play"></i> Start Test
+                    </button>
+                </section>
+
+                <!-- Test Screen -->
+                <section id="testScreen" class="screen">
+                    <div class="test-header">
+                        <div class="timer-display">
+                            <i class="fas fa-hourglass-half"></i> <span id="timer">30</span>s
+                        </div>
+                        <div class="progress-bar-container">
+                            <div id="progressBar"></div>
+                        </div>
+                        <button id="cancelButton" class="neon-button small">
+                            <i class="fas fa-times"></i> Cancel
+                        </button>
+                    </div>
+                    <div id="sampleTextDisplay" class="sample-text"></div>
+                    <textarea id="typingArea" placeholder="Click here and start typing..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+                </section>
+
+                <div class="stats-bar">
+                    <div class="stat"><i class="fas fa-tachometer-alt"></i> WPM: <span id="wpm">0</span></div>
+                    <div class="stat"><i class="fas fa-bullseye"></i> Accuracy: <span id="accuracy">100</span>%</div>
+                    <div class="stat"><i class="fas fa-fire"></i> Streak: <span id="streak">0</span></div>
+                </div>
+            </main>
+
+            <!-- Leaderboard Section -->
+            <aside class="leaderboard-section">
+                <h2><i class="fas fa-trophy"></i> Leaderboard</h2>
+                <div class="leaderboard-controls">
+                    <button id="clearHistoryButton" class="neon-button small"><i class="fas fa-trash"></i> Clear History</button>
+                </div>
+                <div class="table-wrapper">
+                    <table id="leaderboardTable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>User</th>
+                                <th>WPM</th>
+                                <th>Accuracy</th>
+                                <th>Language</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Leaderboard rows will be inserted here -->
+                        </tbody>
+                    </table>
+                    <p id="noHistoryMessage" class="no-history">No history yet. Complete a test to see your results here!</p>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Profile Modal -->
+        <div id="profileModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fas fa-user-circle"></i> User Profile</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="profile-input-group">
+                        <label for="usernameInput">Username</label>
+                        <input type="text" id="usernameInput" placeholder="Enter your name">
+                    </div>
+                    <div class="profile-stats-grid">
+                        <div class="profile-stat-item">
+                            <span class="label">Best WPM</span>
+                            <span class="value" id="profileBestWpm">0</span>
+                        </div>
+                        <div class="profile-stat-item">
+                            <span class="label">Avg. WPM</span>
+                            <span class="value" id="profileAvgWpm">0</span>
+                        </div>
+                        <div class="profile-stat-item">
+                            <span class="label">Tests Taken</span>
+                            <span class="value" id="profileTestsTaken">0</span>
+                        </div>
+                        <div class="profile-stat-item">
+                            <span class="label">Avg. Accuracy</span>
+                            <span class="value" id="profileAvgAccuracy">0%</span>
+                        </div>
+                    </div>
+                    <canvas id="statsChart" width="400" height="200"></canvas>
+                </div>
+                <div class="modal-footer">
+                    <button id="saveProfileButton" class="neon-button"><i class="fas fa-save"></i> Save</button>
+                    <button id="closeProfileButton" class="neon-button">Close</button>
+                </div>
             </div>
         </div>
 
-        <!-- Results Section -->
-        <div id="result">
-            <p>WPM: <span id="wpm">0</span></p>
-            <p>Accuracy: <span id="accuracy">0</span>%</p>
-            <p>Wrong Words: <span id="wrongWordsCount">0</span></p>
-            <p id="letterCounter">Typed Letters: 0</p>
-            <button onclick="saveTypingResult()">Save Result</button>
-        </div>
-
-        <!-- Modal for Test Completion -->
+        <!-- Results Modal -->
         <div id="resultModal" class="modal">
             <div class="modal-content">
-                <h2>Test Completed</h2>
-                <p><strong>WPM:</strong> <span id="modalWpm">0</span></p>
-                <p><strong>Accuracy:</strong> <span id="modalAccuracy">0</span>%</p>
-                <p><strong>Wrong Words:</strong> <span id="modalWrongWords">0</span></p>
-                <ul></ul>
-                <button id="closeModalBtn">Close</button>
+                <div class="modal-header">
+                    <h2><i class="fas fa-flag-checkered"></i> Test Complete!</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="result-stats">
+                        <div class="result-stat-item"><span class="label">WPM</span><span class="value" id="modalWpm">0</span></div>
+                        <div class="result-stat-item"><span class="label">Accuracy</span><span class="value" id="modalAccuracy">0%</span></div>
+                        <div class="result-stat-item"><span class="label">Raw WPM</span><span class="value" id="modalRawWpm">0</span></div>
+                    </div>
+                    <ul id="suggestionsList"></ul>
+                </div>
+                <div class="modal-footer">
+                    <button id="retakeButton" class="neon-button"><i class="fas fa-redo"></i> Retake</button>
+                    <button id="closeModalButton" class="neon-button">Close</button>
+                </div>
             </div>
         </div>
-
-        <!-- Leaderboard Section -->
-        <h2>Your Typing History</h2>
-        <table id="leaderboardTable">
-            <tr>
-                <th>Date</th>
-                <th>WPM</th>
-                <th>Accuracy</th>
-            </tr>
-        </table>
-
-        <!-- Audio Files for Feedback -->
-        <audio id="rightLetterSound" src="keystroke.mp3" preload="auto"></audio>
-        <audio id="wrongLetterSound" src="wrong.mp3" preload="auto"></audio>
-        <audio id="spacebarSound" src="word_done.mp3" preload="auto"></audio>
     </div>
+
+    <!-- Notification Container -->
+    <div id="notificationContainer" class="notification-container"></div>
+
+    <!-- Countdown Overlay -->
+    <div id="countdownOverlay" class="countdown-overlay">
+        <div class="countdown-number" id="countdownNumber">3</div>
+    </div>
+
+    <!-- Sound Effects -->
+    <audio id="keystrokeSound" src="keystroke.mp3" preload="auto"></audio>
+    <audio id="wordDoneSound" src="word_done.mp3" preload="auto"></audio>
 
     <!-- JavaScript File -->
     <script src="script.js"></script>
